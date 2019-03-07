@@ -34,11 +34,18 @@
     fileButton.addEventListener("change", function(target, y) {
       console.log("%ctarget","color:darkseagreen;font-weight:bold;", target);
       var file = target.target.files[0];
-      var time = new Date();
-      getBase64(file).then(
-        data => console.log("file encoding started at " + time + " finished at" + new Date(), data)
+      var startTime = new Date(),
+          endTime;
+      getBase64(file).then(function(data) {
+        endTime = new Date();
+        console.log("file encoding started at " + startTime + " finished at" + endTime + ". \n time taken: " + timeDifference(startTime, endTime) + " seconds");
+        }
       );
-    })
+    });
+
+    function timeDifference(startTime, endTime) {
+      return (endTime - startTime) / 1000;
+    }
   </script>
 
 
